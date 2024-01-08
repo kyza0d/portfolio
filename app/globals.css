@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*:focus {
+  outline: none;
+}
+
+/* Initial state of entering element */
+.dropdown-enter {
+  transition: max-height 200ms ease-in-out;
+  max-height: 0px;
+}
+
+/* Dynamic max-height for entering element */
+.dropdown-enter-active {
+  max-height: var(--content-height); /* This will be set dynamically */
+}
+
+/* Initial state of exiting element */
+.dropdown-exit {
+  transition: max-height 200ms ease-in-out;
+}
+
+/* Final state of exiting element */
+.dropdown-exit-active {
+  max-height: 0px;
+}
+
+.grid-cols-custom {
+  grid-template-columns: 2fr 5fr 7fr;
+}
+
+.site-menu {
+  position: fixed;
+  top: 50%;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input:focus,
+textarea:focus {
+  outline: 1px solid #7f8ea5;
+  outline-offset: -1px;
+}
+
+@layer utilities {
+  .transition-item {
+    transition: all 0.24s ease-out, opacity 0.2s ease-out, color 0.2s ease-out;
+  }
+  .fill {
+    width: 100%;
+    height: 100%;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 18px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    border: 6px solid transparent;
+    box-shadow: inset 0 0 0 10px #313e54;
+    border-radius: 1em;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 0 10px #394760;
+  }
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 10em;
+}
+
+html {
+  background-color: #06101a;
+  /* background-color: #111619; */
+  color: #77859b;
+}
+
+.transition-none {
+  transition: none;
+}
+
+.navigation-item {
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.05s ease-out, color 0.2s ease-out;
+  cursor: pointer;
+}
+
+.active {
+  color: #c9d1d9;
+}
+
+:root #gradient-canvas {
+  width: 100%;
+  height: 100%;
+  /* --gradient-color-1: #02070c; */
+  /* --gradient-color-2: #033832; */
+  /* --gradient-color-3: #02070c; */
+  /* --gradient-color-4: #02070c; */
+  --gradient-color-1: #06101a;
+  --gradient-color-2: #0b1f33;
+  --gradient-color-3: #06101a;
+  --gradient-color-4: #06101a;
+}
+
+b {
+  color: #c1d7ec;
+}
+
+.line {
+  height: 1px;
+  width: 0%;
+  background-color: #394760;
+  margin: 2em 0;
+  margin-top: 1em;
+  transition: width 1.2s ease-in-out;
+}
