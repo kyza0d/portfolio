@@ -1,33 +1,33 @@
 "use client"
 
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-interface SettingsContextProps {
-  backdropEnabled: boolean;
-  toggleBackdrop: () => void;
-  reduceMotionEnabled: boolean;
-  toggleReduceMotion: () => void;
-}
+const defaultSettings = {
+  gradient: false,
+  animations: false,
+  // add other default settings here
+};
 
-const SettingsContext = createContext<SettingsContextProps>({
-  backdropEnabled: true,
-  toggleBackdrop: () => { },
-  reduceMotionEnabled: false,
-  toggleReduceMotion: () => { },
+const SettingsContext = createContext({
+  settings: defaultSettings,
+  setSetting: (name: string, value: any) => { },
 });
 
-export const useSettings = () => useContext(SettingsContext);
+export const SettingsProvider = ({ children }) => {
+  const [settings, setSettings] = useState(defaultSettings);
 
-export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [backdropEnabled, setBackdropEnabled] = useState(true);
-  const [reduceMotionEnabled, setReduceMotionEnabled] = useState(false);
-
-  const toggleBackdrop = () => setBackdropEnabled(prevState => !prevState);
-  const toggleReduceMotion = () => setReduceMotionEnabled(prevState => !prevState);
+  const setSetting = (name, value) => {
+    setSettings((prevSettings) => ({
+      ...prevSettings,
+      [name]: value,
+    }));
+  };
 
   return (
-    <SettingsContext.Provider value={{ backdropEnabled, toggleBackdrop, reduceMotionEnabled, toggleReduceMotion }}>
+    <SettingsContext.Provider value={{ settings, setSetting }}>
       {children}
     </SettingsContext.Provider>
   );
 };
+
+export const useSettings = () => useContext(SettingsContext);

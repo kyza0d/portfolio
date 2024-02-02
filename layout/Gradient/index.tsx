@@ -2,6 +2,7 @@
 
 import Gradient from "layout/Gradient/gradient";
 import { useEffect } from "react";
+import { useSettings } from "../Settings/context";
 
 const gradient = new Gradient();
 
@@ -10,8 +11,10 @@ const Backdrop = () => {
     gradient.initGradient("#gradient-canvas");
   }, []);
 
+  let { settings } = useSettings();
+
   return (
-    <canvas id="gradient-canvas" data-transition-in className="fixed z-[-1]" />
+    <canvas id="gradient-canvas" data-transition-in className={`fixed z-[-1] top-0 ${settings.gradient && 'hidden'}`}></canvas>
   )
 }
 

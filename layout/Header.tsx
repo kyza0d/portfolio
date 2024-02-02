@@ -3,16 +3,16 @@
 import { concat } from "utils";
 import SideBar from "layout/Sidebar";
 import { Button } from "components/Common/Button";
-import { FiMail, FiMenu, FiSettings } from "react-icons/fi";
+import { FiMail, FiMenu, FiSettings, FiX } from "react-icons/fi";
 
 import { useSidebar } from 'layout/Sidebar/context';
 
 export const ToggleSidebar = () => {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, isSidebarVisible } = useSidebar();
   return (
     <div onClick={toggleSidebar}
-      className="fixed left-[3%] top-[8%] z-10 flex cursor-pointer items-center text-sm text-lightgray transition-colors ease-in hover:text-white">
-      <FiMenu size={28} />
+      className="fixed left-[2%] top-[5%] z-40 flex cursor-pointer items-center text-sm text-lightgray transition-colors ease-in hover:text-white">
+      {isSidebarVisible ? <FiX size={24} /> : <FiMenu size={24} />}
     </div>
   );
 };
@@ -20,7 +20,7 @@ export const ToggleSidebar = () => {
 export const SettingsMenu = () => {
   const { toggleSettings } = useSidebar();
   return (
-    <div className="fixed bottom-[8%] left-[3%] cursor-pointer text-white"
+    <div className="fixed bottom-[8%] left-[2%] cursor-pointer text-white"
       onClick={toggleSettings}>
       <FiSettings size={22} />
     </div>
@@ -37,20 +37,15 @@ const Header = () => {
         id="header"
         className={concat(
           "w-full",
-          "fixed left-0 top-[8%]",
+          "fixed left-0 top-[4%]",
           "flex items-center",
-          "px-[3%] sm:pl-[4em]",
+          "px-[6%] sm:pl-[4em]",
         )}>
-        <Button variant="normal" className="ml-auto" size="small">
-          <a
-            className="inline-flex items-center justify-center text-lightgray">
-            Download CV
-          </a>
-        </Button>
-        <Button className="border-2 border-gray" size='small'>
+        <Button className="border-2 border-gray ml-auto" size='small'>
           <FiMail size={18} className='mr-2' />
           <a
-            className="inline-flex items-center justify-center">
+            className="inline-flex items-center justify-center"
+            href="#Contact">
             Contact
           </a>
         </Button>

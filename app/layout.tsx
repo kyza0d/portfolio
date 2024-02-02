@@ -43,16 +43,16 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
       <Providers>
         <body className={manrope.className}>
           <Header />
+          {/* <DebugContext /> */}
           <Navigation />
-          {/* <Backdrop /> */}
           <Backdrop />
           <article
             className={concat(
               // Layout
               "max-w-[1200px]",
               "xl:pl-[100px]", // Show space for navigation menu
-              "lg:px-[3em]", // Hidden when viewport reaches "1324px"
-              "px-0 sm:px-[4vw]",
+              "lg:px-[5em]", // Hidden when viewport reaches "1324px"
+              "px-0 sm:px-[6vw]",
               "mx-auto"
             )}>
             {children}

@@ -176,7 +176,7 @@ const Navigation = () => {
 
   return (
     <ul
-      className="fixed left-[3%] top-[50%] flex translate-y-[-50%] flex-col lg:hidden"
+      className="fixed left-[2%] top-[50%] flex translate-y-[-50%] flex-col lg:hidden"
       id="navigation-pane">
       <Item className="Home" href="#Home">
         Home

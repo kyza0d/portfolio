@@ -8,6 +8,8 @@ import { Heading } from 'layout/Typeography';
 import Toggle from 'components/Common/Toggle';
 import { useSidebar } from 'layout/Sidebar/context';
 import { useSettings } from 'layout/Settings/context';
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 // Define prop types for ListItem
 interface ListItemProps {
@@ -18,7 +20,7 @@ interface ListItemProps {
 // Define prop types for Setting
 interface SettingProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   className?: string;
 }
 
@@ -33,7 +35,7 @@ interface DropDownProps {
 
 // ListItem Component
 const ListItem = ({ children, icon }: ListItemProps) => (
-  <li className="mb-6 inline-flex items-center px-4">
+  <li className="mb-6 inline-flex items-center px-8">
     <div className="mr-3 flex h-[1.40em] w-[1.40em] items-center">
       {React.cloneElement(icon, { className: 'fill text-white' })}
     </div>
@@ -45,7 +47,7 @@ const ListItem = ({ children, icon }: ListItemProps) => (
 const Setting = ({ children, title, className }: SettingProps) => (
   <div>
     {title}
-    <div className={concat('mb-6 mt-3 flex justify-between rounded-md border border-gray p-4', className)}>
+    <div className={concat('', className)}>
       {children}
     </div>
   </div>
@@ -56,6 +58,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
   const contentRef = useRef<HTMLUListElement>(null);
   const { collapsedItems, toggleItemCollapse } = useSidebar();
   const isCollapsed = collapsedItems[title];
+  const { settings, setSetting } = useSettings();
 
   useEffect(() => {
     if (isCollapsed && contentRef.current) {
@@ -66,7 +69,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
   return (
     <div className={`border-b border-b-[#293345] ${className} ${isSettings ? 'py-[0px]' : ''}`}>
 
-      <div className={`flex cursor-pointer items-center h-[50px] px-4 ${isSettings ? 'border-t border-t-[#293345] bg-[#0e1a26]' : ''}`} onClick={() => toggleItemCollapse(title)}>
+      <div className={`flex cursor-pointer items-center h-[60px] px-8 ${isSettings && 'border-t border-t-[#293345] bg-[#0e1a26]'}`} onClick={() => toggleItemCollapse(title)}>
         <div className="mr-3 h-[1.40em] w-[1.40em]">
           {React.cloneElement(icon, { className: 'fill text-white' })}
         </div>
@@ -88,11 +91,15 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
       >
         <ul
           ref={contentRef}
-          className={`overflow-hidden transition-max-height duration-200 ease-in-out ${isSettings ? 'border-t border-t-[#293345] bg-[#06101A]' : ''}`}
+          className={concat(
+            'overflow-hidden transition-max-height duration-200 ease-in-out',
+            settings.animations ? 'transition-none' : 'transition-translate duration-500',
+            isSettings && 'bg-[#06101A] flex'
+          )}
           style={{ maxHeight: `${contentHeight}px` }}
         >
           {items.map((item, key) => (
-            <li className="my-1 px-4 py-1" key={key}>
+            <li className="my-1 px-8 py-0.5 last:pb-4" key={key}>
               {item}
             </li>
           ))}
@@ -105,38 +112,30 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
 // SideBar Component
 const SideBar = () => {
   const { isSidebarVisible, toggleSidebar } = useSidebar();
-  const { toggleReduceMotion, toggleBackdrop } = useSettings();
 
+  // Inside your Sidebar component
+  const { settings, setSetting } = useSettings();
 
   return (
-    <div id="sidebar" className={concat('h-screen', 'fixed top-0 z-30', 'scrollbar overflow-y-scroll', 'z-10 translate-x-[-100%]', 'border-r border-[#293345]', 'transition-translate duration-500', 'flex flex-col justify-start', 'bg-[#06101a]', isSidebarVisible ? 'translate-x-[0%]' : 'translate-x-[-100%]', 'w-[20%] min-w-[300px] text-sm')}>
+    <div id="sidebar" className={concat(
+      'h-screen',
+      'fixed top-0 z-30',
+      'scrollbar overflow-y-scroll',
+      'z-10 translate-x-[-100%]',
+      'border-r border-[#293345]',
+      'flex flex-col justify-start', 'bg-[#06101a]',
+      settings.animations ? 'transition-none' : 'transition-translate duration-500',
+      isSidebarVisible ? 'translate-x-[0%]' : 'translate-x-[-100%]', 'w-[30%] min-w-[300px] text-sm')}>
 
-      <div onClick={toggleSidebar}
-        className="fixed right-[3%] top-[3%] z-30 flex cursor-pointer items-center text-sm text-lightgray transition-colors ease-in hover:text-white">
-        <FiX size={28} />
-      </div>
-
+      <div className='py-[4em]'></div>
       <ul className="flex flex-grow flex-col justify-between text-gray">
-        <div className={concat(
-          'items-startp-4 mb-8 flex flex-col p-4 pt-6',
-          // 'border-b border-b-[#293345] bg-[#040a11]'
-          'border-b border-b-[#293345]'
-        )}>
-          <Heading size='xl' className='text-white'>
-            Evan Smith
-          </Heading>
-          <Heading className="text-gray" size='sm'>
-            Software Engineer
-          </Heading>
-        </div>
-        <ListItem icon={<FiHome />}>Home</ListItem>
-        <ListItem icon={<FiUser />}>About</ListItem>
-        <ListItem icon={<FiTool />}>Skills</ListItem>
-        <ListItem icon={<FiEdit />}>Blog</ListItem>
+        <ListItem icon={<FiHome />}><a href="#Home">Home</a></ListItem>
+        <ListItem icon={<FiUser />}><a href="#About">About</a></ListItem>
+        <ListItem icon={<FiTool />}><a href="#Skills">Skills</a></ListItem>
         <DropDown
           icon={<FiPaperclip />}
           title="Projects"
-          items={["https://placeholder.com", "https://placeholder.com", "https://placeholder.com"]}
+          items={["kyza.dev", "indexr.dev", "mini-pomodoro.dev", "gitreadme.dev", 'instruct.nvim']}
         />
         <DropDown
           icon={<FiMessageSquare />}
@@ -158,16 +157,13 @@ const SideBar = () => {
           icon={<FiUsers />}
           items={[
             <div key="github" className="flex w-full justify-between">
-              Github: <span>github.com/username/</span>
+              Github: <a href="https://github.com/kyza0d/">github.com/kyza0d/</a>
             </div>,
             <div key="email" className="flex w-full justify-between">
-              Instagram: <span>instagram.com/username/</span>
-            </div>,
-            <div key="twitter" className="flex w-full justify-between">
-              Twitter: <span>twitter.com/username/</span>
+              Instagram: <span>instagram.com/kyza0d/</span>
             </div>,
             <div key="linkedin" className="flex w-full justify-between">
-              Linkedin: <span>linkedin.com/in/username/</span>
+              Linkedin: <span>linkedin.com/in/kyza0d/</span>
             </div>,
           ]}
         />
@@ -179,12 +175,17 @@ const SideBar = () => {
           title="Settings"
           isSettings={true}
           items={[
-            <Setting key="gradient" title="Gradient">
-              <Toggle values={["Off", "On"]} callback={() => toggleBackdrop} />
-            </Setting>,
-            <Setting key="animations" title="Animations">
-              <Toggle values={["Off", "On"]} callback={() => toggleReduceMotion} />
-            </Setting>,
+            <div className='min-h-[400px] space-x-4 py-6'>
+              <div className="inline-flex items-center space-x-2">
+                <Switch checked={settings.gradient} onCheckedChange={() => setSetting('gradient', !settings.gradient)} />
+                <Label htmlFor="gradient">Gradient</Label>
+              </div>
+
+              <div className="inline-flex items-center space-x-2">
+                <Switch checked={settings.animations} onCheckedChange={() => setSetting('animations', !settings.animations)} />
+                <Label htmlFor="animations">Animations</Label>
+              </div>
+            </div>
           ]}
           className={concat("sticky bottom-0 left-0 mt-auto border-b-0 text-gray", "h-fit w-full")}
           icon={<FiSettings />}

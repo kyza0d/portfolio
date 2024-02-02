@@ -1,22 +1,17 @@
 import Head from "next/head";
-
 import { Heading, Paragraph, Small } from "layout/Typeography";
-
 import { Button } from "components/Common/Button";
-import { FaGithub } from "react-icons/fa";
-import { FiBriefcase } from "react-icons/fi";
-
 import { concat } from "utils";
-
 import ContactForm from 'components/Contact';
 import Image from "next/image";
 
+
 export default function Home() {
-  function Line({ className }: { className?: string }) {
+  function Line({ className }: { className?: string; }) {
     return <div className={concat("my-14 h-[1px] bg-shaded", className)} />;
   }
 
-  function Skill({ lang: language, img: image, to: link, last }: { lang: string, img?: string, to?: string, last?: boolean }) {
+  function Skill({ lang: language, img: image, to: link, last }: { lang: string; img?: string; to?: string; last?: boolean; }) {
     return (
       <>
         <Small className="my-0 mr-0 inline-block border-lightgray px-[0.4em]" size="sm">
@@ -37,8 +32,7 @@ export default function Home() {
         <title>Evan Smith | Software Engineer</title>
         <meta
           name="description"
-          content="Evan Smith is a web developer with 4 years of experience who is dedicated to creating high-quality websites and web applications. He is always striving to improve his skills and stay current with the latest trends and technologies in the industry. He is committed to providing his clients with websites that not only look great but also function smoothly, and takes pride in delivering projects on-time and within budget."
-        />
+          content="Evan Smith is a web developer with 4 years of experience who is dedicated to creating high-quality websites and web applications. He is always striving to improve his skills and stay current with the latest trends and technologies in the industry. He is committed to providing his clients with websites that not only look great but also function smoothly, and takes pride in delivering projects on-time and within budget." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -61,13 +55,17 @@ export default function Home() {
         <div className="items-start pt-[4em]">
           {/* <Button size="medium" type="primary" className={mansalva.className}> */}
           {/* <Button variant="primary" size="medium">
-            Let&apos;s work together
-          </Button> */}
+              Let&apos;s work together
+            </Button> */}
           <Heading className="text-bold max-w-[28ch] text-white" size="5xl">
             Passionate software engineer committed to crafting exceptional, user-focused web interfaces.
           </Heading>
         </div>
 
+        <div className="flex items-center space-x-2">
+          <Switch id="airplane-mode" />
+          <Label htmlFor="airplane-mode">Airplane Mode</Label>
+        </div>
         <div className="flex items-center gap-6">
           <Button className="flex-row border-2 border-lightgray" size="medium">
             <a href="#Projects">
@@ -75,7 +73,7 @@ export default function Home() {
             </a>
           </Button>
           <Button className="flex-row border-2 border-lightgray" size="medium">
-            <a href="https://github.com/kyza0d/">Github</a>
+            Github
           </Button>
           <Paragraph size="sm" className="max-w-[60ch] text-lightgray md:max-w-[80ch]">
             With over four years of experience in web development, I am proficient in modern
@@ -88,11 +86,20 @@ export default function Home() {
       {/* -- About ------------------------------------------------- */}
 
       <section id="About">
-        <div className="flex flex-col gap-x-[2em] gap-y-2 md:flex-col">
-          <div className="mb-[2em]">
-            <Small size="4xl" className="text-white">
-              About
-            </Small>
+        <div className="mb-[8em]">
+          <Small size="4xl" className="text-white">
+            About
+          </Small>
+        </div>
+        <div className="flex flex-row gap-x-[2em] gap-y-2 md:flex-col">
+          <div
+            className={concat(
+              "bg-[#000000]/20",
+              "h-[26em] w-[26em]",
+              "relative max-w-[26em] overflow-hidden rounded-[9px] opacity-[0.8] md:w-full"
+            )}>
+            <div className="gradient after:opacity-[0.7]"></div>
+            {/* <Image alt="headshot" src="/headshot.jpg" fill={true} className="object-cover object-top saturate-0" /> */}
           </div>
           <div className="flex flex-col justify-center">
             <Paragraph size="sm" className="mb-6 max-w-[60ch] text-white">
@@ -248,9 +255,10 @@ export default function Home() {
             </Small>
           </div>
 
+
           <div className="my-auto h-[450px] w-[40%] bg-[#000000]/20">
-            <div className="flex items-center relative h-full w-full rounded-[9px]">
-              <div className="gradient mx-auto after:opacity-[0.7]">"Comming soon"</div>
+            <div className="relative h-full w-full rounded-[9px]">
+              <div className="gradient after:opacity-[0.7]"></div>
             </div>
           </div>
         </div>
@@ -258,8 +266,8 @@ export default function Home() {
         <div className="mb-[4em] flex justify-center gap-12 md:mb-8">
 
           <div className="my-auto h-[450px] w-[40%] bg-[#000000]/20">
-            <div className="flex items-center relative h-full w-full rounded-[9px]">
-              <div className="mx-auto gradient after:opacity-[0.7]">"Comming Soon"</div>
+            <div className="relative h-full w-full rounded-[9px]">
+              <div className="gradient after:opacity-[0.7]"></div>
             </div>
           </div>
           <div className="my-auto flex flex-col">
@@ -318,3 +326,4 @@ export default function Home() {
     </div>
   );
 }
+
