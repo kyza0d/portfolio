@@ -94,7 +94,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
           className={concat(
             'overflow-hidden transition-max-height duration-200 ease-in-out',
             settings.animations ? 'transition-none' : 'transition-translate duration-500',
-            isSettings && 'bg-[#06101A] flex'
+            isSettings ? 'bg-[#06101A] flex' : undefined
           )}
           style={{ maxHeight: `${contentHeight}px` }}
         >
@@ -111,7 +111,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
 
 // SideBar Component
 const SideBar = () => {
-  const { isSidebarVisible, toggleSidebar } = useSidebar();
+  const { isSidebarVisible } = useSidebar();
 
   // Inside your Sidebar component
   const { settings, setSetting } = useSettings();

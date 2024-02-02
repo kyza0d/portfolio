@@ -62,10 +62,6 @@ export default function Home() {
           </Heading>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <Switch id="airplane-mode" />
-          <Label htmlFor="airplane-mode">Airplane Mode</Label>
-        </div>
         <div className="flex items-center gap-6">
           <Button className="flex-row border-2 border-lightgray" size="medium">
             <a href="#Projects">
