@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { Button } from '@/components/Common/Button';
 import { Small } from '@/layout/Typeography';
+
+import { Button } from "@/components/ui/button";
 
 type EmailData = { from: string; subject: string; text: string; };
 
@@ -93,7 +94,8 @@ const ContactForm = () => {
         {/* Submit Button */}
         <Button
           type="submit"
-          variant='normal'
+          variant='outline'
+          size='lg'
           className={`border-2 border-lightgray ${isLoading ? 'cursor-wait' : ''}`}
         >
           Send

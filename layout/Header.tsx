@@ -2,10 +2,13 @@
 
 import { concat } from "utils";
 import SideBar from "layout/Sidebar";
-import { Button } from "components/Common/Button";
+// import { Button } from "components/Common/Button";
 import { FiMail, FiMenu, FiSettings, FiX } from "react-icons/fi";
 
 import { useSidebar } from 'layout/Sidebar/context';
+import { Button } from "@/components/ui/button";
+
+import { cn } from "@/lib/utils"
 
 export const ToggleSidebar = () => {
   const { toggleSidebar, isSidebarVisible } = useSidebar();
@@ -18,16 +21,17 @@ export const ToggleSidebar = () => {
 };
 
 export const SettingsMenu = () => {
-  const { toggleSettings } = useSidebar();
+  const { animateSettings } = useSidebar();
   return (
     <div className="fixed bottom-[8%] left-[2%] cursor-pointer text-white"
-      onClick={toggleSettings}>
+      onClick={animateSettings}>
       <FiSettings size={22} />
     </div>
   );
 };
 
 const Header = () => {
+  const { isSidebarVisible, toggleSidebar } = useSidebar();
   return (
     <>
       <ToggleSidebar />
@@ -41,7 +45,7 @@ const Header = () => {
           "flex items-center",
           "px-[6%] sm:pl-[4em]",
         )}>
-        <Button className="border-2 border-gray ml-auto" size='small'>
+        <Button className="ml-auto" variant="outline">
           <FiMail size={18} className='mr-2' />
           <a
             className="inline-flex items-center justify-center"

@@ -180,9 +180,7 @@ export default function Home() {
             VS Code / Neovim
           </Small>
           <Paragraph size="sm" className="md:col-span-2 md:mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit at enim elit, viverra
-            sagittis fermentum ac lectus — porta tellus elementum feugiat aliquam. Rhoncus ut amet
-            vitae at eu tincidunt. Sagittis tortor, orci
+            I use Git and GitHub for version control and collaboration, ChatGPT for code generation, and VS Code and Neovim for code editing. These tools streamline my development process, ensuring efficiency and high-quality output.
           </Paragraph>
         </div>
       </section>

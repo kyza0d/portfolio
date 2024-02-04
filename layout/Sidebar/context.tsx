@@ -2,8 +2,6 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-const header = ""
-
 /**
  * Type definition for the Sidebar context.
  */
@@ -11,9 +9,10 @@ type SidebarContextType = {
   isSidebarVisible: boolean;
   showSettings: boolean;
   toggleSidebar: () => void;
-  toggleSettings: () => void;
+  animateSettings: () => void;
   collapsedItems: Record<string, boolean>;
   toggleItemCollapse: (itemId: string) => void;
+  openItemCollapse: (itemId: string) => void;
 };
 
 /**
@@ -37,12 +36,15 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
   const [collapsedItems, setCollapsedItems] = useState<Record<string, boolean>>({});
 
   const toggleSidebar = () => setSidebarVisible(v => !v);
-  const toggleSettings = () => {
+
+  const animateSettings = () => {
     setSidebarVisible(true);
-    setShowSettings(v => !v);
+    setCollapsedItems(items => ({ ...items, settings: !items.settings }));
+    setTimeout(() => openItemCollapse('Settings'), 300)
   };
-  const toggleItemCollapse = (itemId: string) =>
-    setCollapsedItems(items => ({ ...items, [itemId]: !items[itemId] }));
+
+  const toggleItemCollapse = (itemId: string) => setCollapsedItems(items => ({ ...items, [itemId]: !items[itemId] }));
+  const openItemCollapse = (itemId: string) => setCollapsedItems(items => ({ ...items, [itemId]: true }));
 
   return (
     <SidebarContext.Provider value={{
@@ -50,7 +52,8 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
       showSettings,
       collapsedItems,
       toggleSidebar,
-      toggleSettings,
+      animateSettings,
+      openItemCollapse,
       toggleItemCollapse
     }}>
       {children}

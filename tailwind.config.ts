@@ -15,18 +15,6 @@ const config = {
       center: true,
       padding: "2rem",
     },
-    fontSize: {
-      xs: ['0.70rem', { lineHeight: '1.10rem', fontWeight: '400', }],
-      sm: ['0.75rem', { lineHeight: '1.15rem', fontWeight: '400' }],
-      md: ['0.80rem', { lineHeight: '1.25rem', fontWeight: '500' }],
-      lg: ['1.06rem', { lineHeight: '1.48rem', fontWeight: '500' }],
-      xl: ['1.27rem', { lineHeight: '1.70rem', fontWeight: '600' }],
-      '2xl': ['1.59rem', { lineHeight: '1.91rem', fontWeight: '600' }],
-      '3xl': ['1.91rem', { lineHeight: '2.33rem', fontWeight: '700' }],
-      '4xl': ['2.33rem', { lineHeight: '2.76rem', fontWeight: '700' }],
-      '5xl': ['3.4rem', { lineHeight: '4.40rem', fontWeight: '800' }],
-    },
-
     screens: {
       "2xl": { max: "1960px" },
       xl: { max: "1566px" },
@@ -38,7 +26,7 @@ const config = {
     extend: {
       colors: {
         transparent: "transparent",
-        black: "#131517",
+        black: "#06101a",
         white: "#B0C4D8",
         brightwhite: "#CDD9E5",
         gray: "#6a7891",
@@ -52,7 +40,7 @@ const config = {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          foreground: "hsl(var(--primary-foreground))"
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -98,6 +86,57 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+    },
+    fontSize: {
+      xs:
+        ['0.70rem', {
+          lineHeight: '1.10rem',
+          fontWeight: '400',
+          letterSpacing: '0.01em'
+        }],
+      sm:
+        ['0.75rem', {
+          lineHeight: '1.15rem',
+          fontWeight: '400',
+          letterSpacing: '0.01em'
+        }],
+      md:
+        ['0.80rem', {
+          lineHeight: '1.25rem',
+          fontWeight: '500',
+          letterSpacing: '0.02em'
+        }],
+      lg:
+        ['1.06rem', {
+          lineHeight: '1.48rem',
+          fontWeight: '500'
+        }],
+      xl:
+        ['1.27rem', {
+          lineHeight: '1.70rem',
+          fontWeight: '600'
+        }],
+      '2xl':
+        ['1.59rem', {
+          lineHeight: '1.91rem',
+          fontWeight: '600'
+        }],
+      '3xl':
+        ['1.91rem', {
+          lineHeight: '2.33rem',
+          fontWeight: '700',
+        }],
+      '4xl':
+        ['2.5rem', {
+          lineHeight: '3.3rem',
+          fontWeight: '700'
+        }],
+      '5xl':
+        ['3.4rem',
+          {
+            lineHeight: '4.40rem',
+            fontWeight: '800'
+          }],
     },
   },
   plugins: [require("tailwindcss-animate")],

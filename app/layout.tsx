@@ -34,8 +34,8 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
         "xl:text-[19.0px]", // 1566px
         "lg:text-[19.0px]", // 1324px
         "md:text-[19.0px]", // 915px
-        "sm:text-[3.10vw]", // 640px
-        "xsm:text-[3.30vw]", // 460px
+        "sm:text-[3.0vw]", // 640px
+        "xsm:text-[3.40vw]", // 460px
 
         "text-[17px]"
       )}>

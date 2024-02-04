@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
  
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 218 28.4% 70%;
+    --foreground-hover: 218 100% 90%;
     --card: 0 0% 100%;
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
@@ -22,22 +22,12 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
     --border: 220 13% 91%;
-    --input: 215 27.9% 16.9%;
+    --input: 215 27.9% 25.0%;
     --ring: 224 71.4% 4.1%;
-    --radius: 0rem;
+    --radius: 0.5rem;
   }
 }
  
-/* *, */
-/* *::before, */
-/* *::after { */
-/*   outline: 1px solid #0f2433; */
-/* } */
-
-*:focus {
-  outline: none;
-}
-
 /* Initial state of entering element */
 .dropdown-enter {
   transition: max-height 200ms ease-in-out;

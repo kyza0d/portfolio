@@ -165,7 +165,7 @@ const Navigation = () => {
 
     return (
       <div className="text-lg text-gray transition-none">
-        <a className={concat(className, 'navigation-item block py-1 ')} href={href}>
+        <a className={concat(className, 'navigation-item block py-1 text-md ')} href={href}>
           {children}
         </a>
       </div>

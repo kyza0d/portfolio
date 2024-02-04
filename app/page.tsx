@@ -2,7 +2,6 @@ import Head from "next/head";
 
 import { Heading, Paragraph, Small } from "layout/Typeography";
 
-import { Button } from "components/Common/Button";
 import { FaGithub } from "react-icons/fa";
 import { FiBriefcase } from "react-icons/fi";
 
@@ -10,6 +9,7 @@ import { concat } from "utils";
 
 import ContactForm from 'components/Contact';
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   function Line({ className }: { className?: string }) {
@@ -63,20 +63,22 @@ export default function Home() {
           {/* <Button variant="primary" size="medium">
             Let&apos;s work together
           </Button> */}
-          <Heading className="text-bold max-w-[28ch] text-white" size="5xl">
+          <Heading className="text-bold max-w-[28ch] text-white md:text-4xl md:max-w-[42ch]" size="5xl">
             Passionate software engineer committed to crafting exceptional, user-focused web interfaces.
           </Heading>
         </div>
 
-        <div className="flex items-center gap-6">
-          <Button className="flex-row border-2 border-lightgray" size="medium">
-            <a href="#Projects">
-              Projects
-            </a>
-          </Button>
-          <Button className="flex-row border-2 border-lightgray" size="medium">
-            <a href="https://github.com/kyza0d/">Github</a>
-          </Button>
+        <div className="md:flex-col-reverse flex items-center gap-6">
+
+          <div className="space-x-4 flex md:w-full">
+            <Button variant="outline" size="lg">
+              <a href="#Projects"> Projects </a>
+            </Button>
+            <Button variant="outline" size="lg">
+              <a href="https://github.com/kyza0d/">Github</a>
+            </Button>
+          </div>
+
           <Paragraph size="sm" className="max-w-[60ch] text-lightgray md:max-w-[80ch]">
             With over four years of experience in web development, I am proficient in modern
             front-end technologies such as React, TypeScript, and Next.js. I specialize in
@@ -177,9 +179,7 @@ export default function Home() {
             VS Code / Neovim
           </Small>
           <Paragraph size="sm" className="md:col-span-2 md:mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit at enim elit, viverra
-            sagittis fermentum ac lectus — porta tellus elementum feugiat aliquam. Rhoncus ut amet
-            vitae at eu tincidunt. Sagittis tortor, orci
+            Proficient in essential tools like Git, GitHub, and ChatGPT for streamlined development and collaboration. Experienced with VS Code and Neovim for efficient coding—each utility enhances workflow and code quality, ensuring maintainable and collaborative project success.
           </Paragraph>
         </div>
       </section>
@@ -196,7 +196,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-[4em] flex justify-center gap-12 md:mb-8 ">
+        <div className="mb-[4em] sm:flex-col-reverse flex justify-center gap-12 md:mb-8 ">
           <div className="my-auto flex flex-col">
 
             <Heading className="mb-3 text-white" size="3xl">
@@ -248,16 +248,16 @@ export default function Home() {
             </Small>
           </div>
 
-          <div className="my-auto h-[450px] w-[40%] bg-[#000000]/20">
+          <div className="sm:w-full my-auto h-[450px] w-[40%] bg-[#000000]/20">
             <div className="flex items-center relative h-full w-full rounded-[9px]">
               <div className="gradient mx-auto after:opacity-[0.7]">"Comming soon"</div>
             </div>
           </div>
         </div>
 
-        <div className="mb-[4em] flex justify-center gap-12 md:mb-8">
+        <div className="mb-[4em] flex justify-center gap-12 md:mb-8 sm:flex-col ">
 
-          <div className="my-auto h-[450px] w-[40%] bg-[#000000]/20">
+          <div className="sm:w-full y-auto h-[450px] w-[40%] bg-[#000000]/20">
             <div className="flex items-center relative h-full w-full rounded-[9px]">
               <div className="mx-auto gradient after:opacity-[0.7]">"Comming Soon"</div>
             </div>
