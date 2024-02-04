@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Heading, Paragraph, Small } from "layout/Typeography";
-import { Button } from "components/Common/Button";
+import { Button } from "components/ui/button";
 import { concat } from "utils";
 import ContactForm from 'components/Contact';
 import Image from "next/image";
@@ -53,22 +53,18 @@ export default function Home() {
           </Heading>
         </div>
         <div className="items-start pt-[4em]">
-          {/* <Button size="medium" type="primary" className={mansalva.className}> */}
-          {/* <Button variant="primary" size="medium">
-              Let&apos;s work together
-            </Button> */}
           <Heading className="text-bold max-w-[28ch] text-white" size="5xl">
             Passionate software engineer committed to crafting exceptional, user-focused web interfaces.
           </Heading>
         </div>
 
         <div className="flex items-center gap-6">
-          <Button className="flex-row border-2 border-lightgray" size="medium">
+          <Button className="flex-row border-2 border-lightgray" size="lg">
             <a href="#Projects">
               Projects
             </a>
           </Button>
-          <Button className="flex-row border-2 border-lightgray" size="medium">
+          <Button className="flex-row border-2 border-lightgray" size="lg">
             Github
           </Button>
           <Paragraph size="sm" className="max-w-[60ch] text-lightgray md:max-w-[80ch]">
