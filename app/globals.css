@@ -126,7 +126,7 @@ textarea:focus-visible {
 }
 
 html.light #gradient-canvas {
-  filter: invert(0.9) hue-rotate(180deg) saturate(2.6);
+  filter: invert(0.95) hue-rotate(180deg) saturate(1.8);
 }
 
 html.dark {

@@ -1,5 +1,7 @@
 "use client"
 
+"use client"
+
 import axios from 'axios';
 
 import { Text } from "@/components/ui/text";
@@ -7,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Form, FormControl, FormDescription, FormField,
+  Form, FormControl, FormField,
   FormItem, FormLabel, FormMessage,
 } from "@/components/ui/form";
 
@@ -50,9 +52,9 @@ const ContactForm = () => {
 
   // Define a schema for email data
   const formSchema = z.object({
-    email: z.string().email(),
-    subject: z.string(),
-    message: z.string(),
+    email: z.string().email({ message: "Invalid email address" }),
+    subject: z.string().min(1, { message: "Subject is required" }),
+    body: z.string().min(1, { message: "Message is required" }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +62,7 @@ const ContactForm = () => {
     defaultValues: {
       email: "",
       subject: "",
-      message: "",
+      body: "",
     },
   });
 
@@ -70,7 +72,7 @@ const ContactForm = () => {
     const emailData: EmailData = {
       from: values.email,
       subject: values.subject,
-      body: values.message,
+      body: values.body,
     };
     await sendEmail(emailData);
   }
@@ -132,7 +134,7 @@ const ContactForm = () => {
         {/* Message */}
         <FormField
           control={form.control}
-          name="message"
+          name="body"
           render={({ field }) => (
             <FormItem>
               <FormLabel><Text size='sm'>Message</Text></FormLabel>

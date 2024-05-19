@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 type RequestBody = {
   from: string;
   subject: string;
-  text: string;
+  body: string;
 };
 
 // Define the response type
@@ -19,7 +19,7 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     // Ensure the request body has the correct type
-    const { from, subject, text } = req.body as RequestBody;
+    const { from, subject, body } = req.body as RequestBody;
 
     const transporter = nodemailer.createTransport({
       service: process.env.EMAIL_SERVICE,
@@ -38,7 +38,7 @@ export default async function handler(
           <p><strong>New message from:</strong> ${from}</p>
           <p><strong>Subject:</strong> ${subject}</p>
           <p><strong>Message:</strong></p>
-          <p>${text}</p>
+          <p>${body}</p>
         </body>
       </html>
     `;

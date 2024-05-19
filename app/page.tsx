@@ -19,7 +19,7 @@ export default function Home() {
   function Skill({ lang: language, last }: { lang: string, to?: string, last?: boolean }) {
     return (
       <Text size="sm">
-        {language} {!last && <span className="text-md px-[0.1em] align-bottom mx-0.5">{"/"}</span>}
+        {language} {!last && <span className="leading-5 text-md px-[0.1em] align-bottom mx-0.5">{"/"}</span>}
       </Text>
     );
   }
@@ -38,7 +38,7 @@ export default function Home() {
 
       {/* -- [ Home ] -------------------------------------------------- */}
 
-      <div className="z-10 flex items-center py-6 md:hidden">
+      <div className="z-10 flex items-center py-8 md:hidden">
         <Text size="md" variant="header">
           Evan Smith
         </Text>
@@ -47,6 +47,9 @@ export default function Home() {
           Software Engineer
         </Text>
       </div>
+
+      <div className="my-2 h-[1px] bg-shaded md:hidden" />
+
 
       <section id="Home" className="mx-auto min-h-[70vh] md:flex md:justify-center md:pt-24">
         <Button variant="default" size="sm" className="w-fit mb-2">
@@ -110,7 +113,7 @@ export default function Home() {
 
         <div className="grid-cols-custom grid w-full md:grid-cols-2 ">
           <Text variant="subtitle">Front-end:</Text>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap h-fit gap-y-2">
             <Skill lang="React" />
             <Skill lang="Next.js" />
             <Skill lang="TypeScript" />
@@ -126,9 +129,11 @@ export default function Home() {
         </div>
 
         <Line />
+
         <div className="grid-cols-custom grid w-full md:grid-cols-2">
           <Text variant="subtitle">Back-end:</Text>
-          <div className="flex flex-wrap">
+
+          <div className="flex flex-wrap h-fit gap-y-2">
             <Skill lang="Python" />
             <Skill lang="Docker" />
             <Skill lang="Railway" />
@@ -139,16 +144,19 @@ export default function Home() {
             <Skill lang="PlanetScale" />
             <Skill lang="Strapi" last={true} />
           </div>
+
           <Text size="sm" className="md:col-span-2 md:mt-4">
             My skills include working with server-side languages, databases, and APIs to build
             robust and functional back-end systems. I am skilled in integrating the front-end and
             back-end of a web application to create a seamless user experience.
           </Text>
         </div>
+
         <Line />
+
         <div className="grid-cols-custom grid w-full md:grid-cols-2">
           <Text variant="subtitle">Design:</Text>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap h-fit gap-y-2">
             <Skill lang="Figma" />
             <Skill lang="Design Resources" last={true} />
           </div>
@@ -162,12 +170,12 @@ export default function Home() {
         <Line />
         <div className="grid-cols-custom grid w-full md:grid-cols-2">
           <Text variant="subtitle">Utilites:</Text>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap h-fit gap-y-2">
             <Skill lang="Git" />
             <Skill lang="Github" />
             <Skill lang="ChatGPT" />
             <Skill lang="VS Code" />
-            <Skill lang="Neovim" />
+            <Skill lang="Neovim" last={true} />
           </div>
           <Text size="sm" className="md:col-span-2 md:mt-4">
             Proficient in essential tools like Git, GitHub, and ChatGPT for streamlined development and collaboration. Experienced with VS Code and Neovim for efficient coding—each utility enhances workflow and code quality, ensuring maintainable and collaborative project success.
