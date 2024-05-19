@@ -1,115 +1,147 @@
 "use client"
 
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
 import axios from 'axios';
-import { Small } from '@/layout/Typeography';
 
+import { Text } from "@/components/ui/text";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form, FormControl, FormDescription, FormField,
+  FormItem, FormLabel, FormMessage,
+} from "@/components/ui/form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 type EmailData = { from: string; subject: string; text: string; };
 
-const useSendEmail = (setEmailStatus: (status: string) => void, setLoading: (loading: boolean) => void) => {
-  return async (emailData: EmailData) => {
-    setLoading(true);
-    setEmailStatus('');
-    try {
-      const response = await axios.post('/api/send-mail', emailData);
-      if (response.status === 200) { setEmailStatus('Email sent successfully') }
-      else { setEmailStatus('Failed to send email'); }
-    } catch (error) {
-      setEmailStatus('Error sending email');
-    } finally {
-      setLoading(false);
-    }
-  };
+const useSendEmail = (setEmailStatus, setLoading) => async emailData => {
+  setLoading(true);
+  setEmailStatus('');
+  try {
+    const response = await axios.post('/api/send-mail', emailData);
+    setEmailStatus(response.status === 200 ? 'Email sent successfully' : 'Failed to send email');
+  } catch (error) {
+    setEmailStatus('Error sending email');
+  } finally {
+    setLoading(false);
+  }
 };
 
 type FormValues = { email: string; subject: string; message: string; };
 
 const ContactForm = () => {
-  const [isLoading, setLoading] = useState(false);
   const [emailStatus, setEmailStatus] = useState('');
-  const sendEmail = useSendEmail(setEmailStatus, setLoading);
+  const [loading, setLoading] = useState(false);
 
-  const formik = useFormik<FormValues>({
-    initialValues: { email: '', subject: '', message: '', },
+  // Define a schema for email data
+  const formSchema = z.object({
+    email: z.string().email(),
+    subject: z.string(),
+    message: z.string(),
+  });
 
-    onSubmit: async (values: FormValues) => {
-      await sendEmail({
-        from: values.email,
-        subject: values.subject,
-        text: values.message,
-      });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      subject: "",
+      message: "",
     },
   });
 
-  const inputClass = (fieldName: keyof FormValues) => {
-    const fieldTouched = formik.touched[fieldName];
-    const fieldValue = formik.values[fieldName];
-    return `border-b bg-transparent p-4 text-sm placeholder-shaded ${!fieldValue && fieldTouched ? 'outline outline-1 -outline-offset-1 outline-red-600' : ''
-      }`;
+  const sendEmail = useSendEmail(setEmailStatus, setLoading);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const emailData: EmailData = {
+      from: values.email,
+      subject: values.subject,
+      text: values.message,
+    };
+    await sendEmail(emailData);
+  }
+
+  const renderAlert = () => {
+    if (emailStatus === 'Email sent successfully') {
+      return (
+        <Alert variant="success">
+          <AlertTitle>Success</AlertTitle>
+          <AlertDescription>{emailStatus}</AlertDescription>
+        </Alert>
+      );
+    } else if (emailStatus) {
+      return (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{emailStatus}</AlertDescription>
+        </Alert>
+      );
+    }
+    return null;
   };
 
   return (
-    <form onSubmit={formik.handleSubmit} className="text-gray grid grid-cols-2 gap-6 gap-y-[4em]">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className='flex space-x-8 md:space-x-0 md:space-y-8 md:flex-col'>
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className='w-full'>
+                <FormLabel><Text size='sm'>Email</Text></FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      {/* Email Input */}
-      <input
-        type="email"
-        id="email"
-        name="email"
-        className={inputClass('email')}
-        onChange={formik.handleChange}
-        value={formik.values.email}
-        required
-        placeholder="example@email.com"
-      />
+          {/* Subject */}
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem className='w-full'>
+                <FormLabel><Text size='sm'>Subject</Text></FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-      {/* Subject Input */}
-      <input
-        type="text"
-        id="subject"
-        name="subject"
-        className={inputClass('subject')}
-        onChange={formik.handleChange}
-        value={formik.values.subject}
-        required
-        placeholder="Your Subject"
-      />
-
-      {/* Message Textarea */}
-      <textarea
-        id="message"
-        name="message"
-        className={`${inputClass('message')} col-span-2 resize-none`}
-        onChange={formik.handleChange}
-        value={formik.values.message}
-        required
-        rows={5}
-        placeholder="Enter your message here"
-      />
-
-      <div className='flex items-center'>
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          variant='outline'
-          size='lg'
-          className={`border-2 border-lightgray ${isLoading ? 'cursor-wait' : ''}`}
-        >
-          Send
+        {/* Message */}
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel><Text size='sm'>Message</Text></FormLabel>
+              <FormControl>
+                <Textarea
+                  className="resize-none"
+                  {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button variant="outline" type="submit" disabled={loading}>
+          {loading ? 'Sending...' : 'Submit'}
         </Button>
-
-        {/* Feedback Message */}
-        {emailStatus && (
-          <Small className={`ml-4 ${emailStatus === 'Email sent successfully' ? 'text-green-600' : 'text-red-600'}`}>
-            {emailStatus}
-          </Small>
-        )}
-      </div>
-    </form>
+        {renderAlert()}
+      </form>
+    </Form>
   );
-};
+}
 
 export default ContactForm;

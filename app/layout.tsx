@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Providers } from './providers'
+import { ThemeProvider } from "@/components/theme-provider"
 import { concat } from '@/utils'
 
 import { Manrope } from 'next/font/google'
@@ -14,9 +15,8 @@ const manrope = Manrope({
 
 
 import Header from "layout/Header";
-import Backdrop from 'layout/Gradient'
+import Gradient from 'layout/Gradient'
 import Navigation from '@/layout/Navigation'
-import DebugContext from '@/utils/debugContext'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -26,37 +26,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
 
   return (
-    <html lang="en"
-      className={concat(
-        manrope.className,
-
-        "2xl:text-[20.0px]", // 1960px
-        "xl:text-[19.0px]", // 1566px
-        "lg:text-[19.0px]", // 1324px
-        "md:text-[19.0px]", // 915px
-        "sm:text-[3.0vw]", // 640px
-        "xsm:text-[3.40vw]", // 460px
-
-        "text-[17px]"
-      )}>
-
+    <html lang="en">
       <Providers>
-        <body className={manrope.className}>
-          <Header />
-          {/* <DebugContext /> */}
-          <Navigation />
-          <Backdrop />
-          <article
-            className={concat(
-              // Layout
-              "max-w-[1200px]",
-              "xl:pl-[100px]", // Show space for navigation menu
-              "lg:px-[5em]", // Hidden when viewport reaches "1324px"
-              "px-0 sm:px-[6vw]",
-              "mx-auto"
-            )}>
-            {children}
-          </article>
+        <body className={concat(manrope.className, "subpixel-antialiased")}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <Navigation />
+            <Gradient />
+            <article className='mx-auto sm:px-3 md:pt-12 md:px-6 px-12 max-w-[1140px] lg:max-w-[950px] md:max-w-[750px]'>
+              {children}
+            </article>
+          </ThemeProvider>
         </body>
       </Providers>
     </html>

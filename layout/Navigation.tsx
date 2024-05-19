@@ -64,10 +64,12 @@ const Navigation = () => {
     // Get all navigation items
     const items = document.querySelectorAll(".navigation-item") as NodeListOf<HTMLElement>;
 
+    // Class names to be toggled
+    const classesToAdd = ["text-midnight-800", "dark:text-midnight-200"];
+
     // Updates the styles of the navigation items based on the given y-coordinate
     function updateNavigationItems(y: number) {
       let closestItem: HTMLElement | null = null;
-
       let closest_distance = Infinity;
 
       // Find the navigation item closest to the given y-coordinate
@@ -85,14 +87,19 @@ const Navigation = () => {
         item.style.opacity = `${1 - distance / 250}`;
       });
 
-      // Remove 'active' class from all navigation items
-      items.forEach((item) => item.classList.remove("active"));
+      // Remove 'active' class and other classes from all navigation items
+      items.forEach((item) => {
+        item.classList.remove("active");
+        classesToAdd.forEach(cls => item.classList.remove(cls));
+      });
 
-      // Add 'active' class to the closest navigation item
+      // Add 'active' class and other classes to the closest navigation item
       if (closestItem != null) {
-        (closestItem as HTMLElement).classList.add("active");
+        closestItem.classList.add("active");
+        classesToAdd.forEach(cls => closestItem.classList.add(cls));
       }
     }
+
     // Get the navigation pane element
     const navigation_pane = document.querySelector("#navigation-pane");
 
@@ -164,7 +171,7 @@ const Navigation = () => {
   const Item = ({ children, href, className }: ItemProps) => {
 
     return (
-      <div className="text-lg text-gray transition-none">
+      <div className="text-lg text-midnight-500 transition-none">
         <a className={concat(className, 'navigation-item block py-1 text-md ')} href={href}>
           {children}
         </a>
@@ -176,7 +183,7 @@ const Navigation = () => {
 
   return (
     <ul
-      className="fixed left-[2%] top-[50%] flex translate-y-[-50%] flex-col lg:hidden"
+      className="fixed left-[2%] top-[50%] flex translate-y-[-50%] flex-col xl:hidden"
       id="navigation-pane">
       <Item className="Home" href="#Home">
         Home

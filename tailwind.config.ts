@@ -11,25 +11,71 @@ const config = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
+    // -- [ Font sizes ] --------------------------------
+    fontSize: {
+      xs: ['0.75rem', { // Slightly increased for better legibility
+        lineHeight: '1.15rem',
+        letterSpacing: '0.006em',
+        fontWeight: '400',
+      }],
+      sm: ['0.920rem', { // Adjusted for smoother transition
+        lineHeight: '1.30rem',
+        letterSpacing: '0.007em',
+        fontWeight: '400',
+      }],
+      md: ['1rem', { // Standard size for medium, making scaling more gradual
+        lineHeight: '1.50rem',
+        letterSpacing: '0.008em',
+        fontWeight: '500',
+      }],
+      lg: ['1.125rem', { // Less drastic increase
+        lineHeight: '1.75rem',
+        letterSpacing: '0.01em',
+        fontWeight: '500'
+      }],
+      xl: ['1.9rem', { // Incremental increase for better scaling
+        lineHeight: '2.4rem',
+        letterSpacing: '0.014em',
+        fontWeight: '700'
+      }],
+      '2xl': ['2.0rem', { // Incremental increase for better scaling
+        lineHeight: '2.6rem',
+        letterSpacing: '0.014em',
+        fontWeight: '700'
+      }],
+      '3xl': ['2.30rem', { // Adjusted for gradual scaling
+        lineHeight: '3.0rem',
+        letterSpacing: '0.016em',
+        fontWeight: '700',
+      }],
+      '4xl': ['2.50rem', { // Reduced size for smoother transition
+        lineHeight: '3.40rem',
+        letterSpacing: '0.018em',
+        fontWeight: '700'
+      }],
+      '5xl': ['3.00rem', { // Smallest size in the highest range for smoother scaling
+        lineHeight: '3.80rem',
+        letterSpacing: '0.02em',
+        fontWeight: '800'
+      }],
     },
+    // -- [ Breakpoints ] --------------------------------
     screens: {
-      "2xl": { max: "1960px" },
-      xl: { max: "1566px" },
-      lg: { max: "1324px" },
-      md: { max: "915px" },
-      sm: { max: "640px" },
-      xsm: { max: "460px" },
+      xsm: { max: "575px" },    // Extra small devices (portrait phones, less than 576px)
+      sm: { max: "767px" },    // Small devices (landscape phones, 576px and up)
+      md: { max: "991px" },    // Medium devices (tablets, 768px and up)
+      lg: { max: "1199px" },    // Large devices (desktops, 992px and up)
+      xl: { max: "1599px" },    // Extra large devices (large desktops, 1200px and up)
+      "2xl": { min: "1600px" },    // 2x large devices (larger desktops, 1600px and up)
     },
     extend: {
+      // -- [ Colors ] --------------------------------
       colors: {
         transparent: "transparent",
         black: "#06101a",
         white: "#B0C4D8",
         brightwhite: "#CDD9E5",
-        gray: "#6a7891",
+        gray: "#617089",
         lightgray: "#8092b2",
         shaded: "#485366",
         blue: "#3780D6",
@@ -38,6 +84,17 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        headers: "hsl(var(--header-foreground))",
+        midnight: {
+          100: "#d6e4f1",
+          200: "#b2d7e9",
+          300: "#82b2cc",
+          400: "#5e8eaf",
+          500: "#3d6c93",
+          600: "#27486f",
+          700: "#152b45",
+          800: "#09131d",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))"
@@ -86,57 +143,6 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-    },
-    fontSize: {
-      xs:
-        ['0.70rem', {
-          lineHeight: '1.10rem',
-          fontWeight: '400',
-          letterSpacing: '0.01em'
-        }],
-      sm:
-        ['0.75rem', {
-          lineHeight: '1.15rem',
-          fontWeight: '400',
-          letterSpacing: '0.01em'
-        }],
-      md:
-        ['0.80rem', {
-          lineHeight: '1.25rem',
-          fontWeight: '500',
-          letterSpacing: '0.02em'
-        }],
-      lg:
-        ['1.06rem', {
-          lineHeight: '1.48rem',
-          fontWeight: '500'
-        }],
-      xl:
-        ['1.27rem', {
-          lineHeight: '1.70rem',
-          fontWeight: '600'
-        }],
-      '2xl':
-        ['1.59rem', {
-          lineHeight: '1.91rem',
-          fontWeight: '600'
-        }],
-      '3xl':
-        ['1.91rem', {
-          lineHeight: '2.33rem',
-          fontWeight: '700',
-        }],
-      '4xl':
-        ['2.5rem', {
-          lineHeight: '3.3rem',
-          fontWeight: '700'
-        }],
-      '5xl':
-        ['3.4rem',
-          {
-            lineHeight: '4.40rem',
-            fontWeight: '800'
-          }],
     },
   },
   plugins: [require("tailwindcss-animate")],

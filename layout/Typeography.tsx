@@ -7,7 +7,7 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const fontSizeClasses = {
-  xs: "mb-0.5 text-xs",
+  xs: "mb-0.5 text-sm",
   sm: "mb-1 text-sm",
   md: "mb-1 text-md",
   lg: "mb-2 text-lg",

@@ -9,6 +9,7 @@ import { concat } from "utils";
 import ContactForm from 'components/Contact';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Console } from "console";
 
 export default function Home() {
   function Line({ className }: { className?: string }) {
@@ -37,42 +38,45 @@ export default function Home() {
 
       {/* -- [ Home ] -------------------------------------------------- */}
 
-      <section id="Home" className="max-w-[45em] mx-auto">
-        <div className="flex items-center md:pt-16">
-          <Text size="md" variant="subtitle" className="font-bold text-white mb-0">
-            Evan Smith
-          </Text>
-          <Separator className="mx-4 h-5 bg-shaded" orientation="vertical" />
-          <Text size='sm' className="mb-0">
-            Software Engineer
-          </Text>
-        </div>
+      <div className="z-10 flex items-center py-6 md:hidden">
+        <Text size="md" variant="header">
+          Evan Smith
+        </Text>
+        <Separator className="mx-4 h-5 bg-shaded" orientation="vertical" />
+        <Text size='sm' className="mb-0">
+          Software Engineer
+        </Text>
+      </div>
 
-        <div className="items-start pt-[2em]">
-          <Text variant="header" size="xl" className="max-w-[26ch]">
-            Software engineer committed to crafting exceptional, user-focused web interfaces.
-          </Text>
-        </div>
+      <section id="Home" className="mx-auto min-h-[70vh] md:flex md:justify-center md:pt-24">
+        <Button variant="default" size="sm" className="w-fit mb-2">
+          Available for work
+        </Button>
+        <Text variant="header" size="2xl" className="max-w-[25ch]">
+          Creative problem solver specializing in developing sleek, user-friendly websites.
+        </Text>
 
-        <div className="md:flex-col-reverse flex items-center md:items-start gap-6">
-          <div className="space-x-4 flex md:w-full">
-            <Button variant="outline" size="lg">
+        <div className="md:flex-col-reverse flex md:items-start items-center gap-6 mt-4">
+
+          <div className="space-x-4 flex md:w-full sm:flex-wrap sm:space-x-0 sm:space-y-4">
+            <Button variant="outline" size="lg" className="sm:w-full">
               <a href="#Projects"> Projects </a>
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" className="sm:w-full">
               <a href="https://github.com/kyza0d/">Github</a>
             </Button>
           </div>
 
-          <Text size="sm" className="pt-4 max-w-[52ch]">
+          <Text size="sm" className="md:pt-4 max-w-[52ch]">
             With over four years of web development experience, I excel in React, TypeScript, and Next.js, focusing on creating optimized, responsive, and user-friendly websites.
           </Text>
         </div>
+
       </section>
 
       {/* -- [ About ] ------------------------------------------------- */}
 
-      <section id="About" className="mx-auto max-w-[45em]">
+      <section id="About" className="mx-auto">
         <div className="mb-20 flex items-center justify-center">
           <Text variant="header" size="xl">
             About
@@ -97,7 +101,7 @@ export default function Home() {
 
       <section id="Skills">
         <div className="mb-20 flex items-center justify-center ">
-          <Text variant="header" size="xl" className="text-white">
+          <Text variant="header" size="xl">
             Skills
           </Text>
           <div className="ml-16 mr-0 h-[1px] w-full bg-[#394760]">
@@ -105,7 +109,7 @@ export default function Home() {
         </div>
 
         <div className="grid-cols-custom grid w-full md:grid-cols-2 ">
-          <Text className="text-white font-bold md:text-xl">Front-end:</Text>
+          <Text variant="subtitle">Front-end:</Text>
           <div className="flex flex-wrap">
             <Skill lang="React" />
             <Skill lang="Next.js" />
@@ -135,7 +139,7 @@ export default function Home() {
             <Skill lang="PlanetScale" />
             <Skill lang="Strapi" last={true} />
           </div>
-          <Text size="md" className="md:col-span-2 md:mt-4">
+          <Text size="sm" className="md:col-span-2 md:mt-4">
             My skills include working with server-side languages, databases, and APIs to build
             robust and functional back-end systems. I am skilled in integrating the front-end and
             back-end of a web application to create a seamless user experience.
@@ -185,31 +189,28 @@ export default function Home() {
 
         <div className="mb-24 md:flex-col-reverse flex justify-center gap-12 md:mb-16 ">
           <div className="my-auto flex flex-col">
+            <div className="flex items-start flex-col mb-6">
+              <Text variant="header" size="lg"> Indexr </Text>
+              <Text variant="default" size="sm"> Extensive Data Search</Text>
+            </div>
 
-            <Text variant="header" size="lg" className="mb-3">
-              Indexr <Text className="text-gray"> Extensive Data Search</Text>
-            </Text>
-
-            <Text size="md" className="flex items-center font-bold leading-6 text-white">
-              Description:
-            </Text>
-
+            <Text variant="subtitle" size="sm" className="mb-2"> Description: </Text>
             <Text size="sm" className="mb-6 max-w-[60ch]">
               Indexr is a versatile web application designed for efficient data management and searching. It empowers users with optimized search capabilities using Fuse.js, allowing seamless exploration of custom datasets. The clean interface ensures a user-friendly experience, while the app's login feature enables access to and viewing of uploaded datasets.
             </Text>
 
-            <Text size="sm" className="flex items-center font-bold leading-6 text-white">
+            <Text variant="subtitle" size="sm" className="mb-2">
               Key Features:
             </Text>
 
-            <ul className="mb-6 list-disc text-lightgray pl-4">
+            <ul className="mb-5 list-disc text-lightgray pl-4">
               <li><Text size='sm'>Optimized searching with Fuse.js integration.</Text></li>
               <li><Text size='sm'>Login to access and view other uploaded datasets.</Text></li>
               <li><Text size='sm'>Upload and search through custom datasets.</Text></li>
               <li><Text size='sm'>Clean and user-friendly interface.</Text></li>
             </ul>
 
-            <Text size="sm" variant="subtitle">
+            <Text variant="subtitle" size="sm" className="mb-2">
               Technologies:
             </Text>
 
@@ -235,66 +236,12 @@ export default function Home() {
             </Text>
           </div>
 
-          <div className="md:w-full my-auto h-[400px] w-[60%] bg-[#000000]/20">
-            <div className="flex items-center relative h-full w-full rounded-[9px]">
+          <div className="md:w-full my-auto h-[400px] w-[60%] bg-[#000000]/20 rounded-[9px]">
+            <div className="flex items-center relative h-full w-full">
               <Text className="gradient mx-auto after:opacity-[0.7]">Coming soon</Text>
             </div>
           </div>
         </div>
-
-        <div className="mb-20 flex justify-center gap-12 md:mb-8 md:flex-col ">
-          <div className="md:w-full my-auto h-[400px] w-[60%] bg-[#000000]/20">
-            <div className="flex items-center relative h-full w-full rounded-[9px]">
-              <Text className="gradient mx-auto after:opacity-[0.7]">Coming soon</Text>
-            </div>
-          </div>
-          <div className="my-auto flex flex-col">
-
-            <Text variant="header" size="lg" className="mb-3">
-              Git.me <Text className="text-gray"> GitHub Readme Generator</Text>
-            </Text>
-
-            <Text size="sm" className="flex items-center font-bold leading-6 text-white">
-              Description:
-            </Text>
-
-            <Text size="sm" className="mb-6 max-w-[60ch]">
-              git.me is a powerful web application that simplifies the creation of GitHub Readmes. With an intuitive interface, users can effortlessly generate Readmes based on a configuration. Enjoy the flexibility to update your Readme easily, ensuring your project documentation stays up-to-date.
-            </Text>
-
-            <Text size="sm" className="flex items-center font-bold leading-6 text-white">
-              Key Features:
-            </Text>
-
-            <ul className="mb-6 pl-4 list-disc text-lightgray">
-              <li><Text size='sm'>Easily create GitHub Readmes based on a configuration.</Text></li>
-              <li><Text size='sm'>Clean and user-friendly interface.</Text></li>
-              <li><Text size='sm'>Ability to easily update the Readme.</Text></li>
-            </ul>
-
-            <Text size="sm" className="flex items-center font-bold leading-6 text-white">
-              Technologies:
-            </Text>
-
-            <div className="flex items-center">
-              <Text size="sm">Scripting:</Text>
-              <Skill lang="Node.js" />
-              <Skill lang="Fetch API" />
-              <Skill lang="GitHub API" last={true} />
-            </div>
-
-            <Text size="sm" className="flex items-center leading-6">
-              Script Location: <span className="pl-3 text-gray underline">/git.me/scripts/update.js</span>
-            </Text>
-
-            <Text size="sm" className="flex items-center leading-6">
-              Repository: <span className="pl-3 text-gray underline">https://github.com/username/git.me</span>
-            </Text>
-          </div>
-
-        </div>
-
-
       </section>
 
       {/* -- Contact ----------------------------------------------- */}
@@ -305,7 +252,7 @@ export default function Home() {
             Contact
           </Text>
           <Text size="sm" className="text-gray max-w-[30ch]">
-            Seeking new oppurtunities and collaborations, feel free to reach out.
+            I'm seeking new oppurtunities and collaborations, feel free to reach out.
           </Text>
         </div>
 

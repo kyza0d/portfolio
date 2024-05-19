@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { concat } from 'utils';
-import { FiChevronDown, FiHome, FiUser, FiTool, FiPaperclip, FiMessageSquare, FiUsers, FiEdit, FiSettings, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiHome, FiUser, FiTool, FiPaperclip, FiMessageSquare, FiUsers, FiSettings } from 'react-icons/fi';
 import { useSidebar } from 'layout/Sidebar/context';
 import { useSettings } from 'layout/Settings/context';
 import { Label } from "@/components/ui/label"
@@ -28,7 +28,7 @@ interface DropDownProps {
 const ListItem = ({ children, icon }: ListItemProps) => (
   <li className="mb-6 inline-flex items-center px-8">
     <div className="mr-3 flex h-[1.40em] w-[1.40em] items-center">
-      {React.cloneElement(icon, { className: 'fill text-white' })}
+      {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-white' })}
     </div>
     {children}
   </li>
@@ -51,9 +51,9 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
   return (
     <div className={`border-b border-b-[#293345] ${className} ${isSettings ? 'py-[0px]' : ''}`}>
 
-      <div className={`flex cursor-pointer items-center h-[60px] px-8 ${isSettings && 'border-t border-t-[#293345] bg-[#0e1a26]'}`} onClick={() => toggleItemCollapse(title)}>
+      <div className={`flex cursor-pointer items-center h-[60px] px-8 ${isSettings && 'border-t border-t-[#293345] bg-midnight-100 dark:bg-midnight-800'}`} onClick={() => toggleItemCollapse(title)}>
         <div className="mr-3 h-[1.40em] w-[1.40em]">
-          {React.cloneElement(icon, { className: 'fill text-white' })}
+          {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-white' })}
         </div>
         <span className="mr-auto inline-block">{title}</span>
         <FiChevronDown className={`${isSettings ? (isCollapsed ? 'rotate-[0deg]' : 'rotate-[-180deg]') : (isCollapsed ? 'rotate-[-180deg]' : '')} transform transition-transform`} />
@@ -76,7 +76,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
           className={concat(
             'overflow-hidden transition-max-height duration-200 ease-in-out',
             settings.animations ? 'transition-none' : 'transition-translate duration-500',
-            isSettings ? 'bg-[#06101A] flex' : undefined
+            isSettings ? 'bg-midnight-100 dark:bg-midnight-800 flex' : undefined
           )}
           style={{ maxHeight: `${contentHeight}px` }}
         >
@@ -102,13 +102,13 @@ const SideBar = () => {
     <>
       <div id="sidebar" className={concat(
         'h-screen',
-        'fixed top-0 z-30',
-        'scrollbar overflow-y-scroll',
+        'fixed top-0 z-20',
+        'overflow-y-scroll',
         'z-10 translate-x-[-100%]',
         'border-r border-[#293345]',
-        'flex flex-col justify-start', 'bg-[#06101a]',
+        'flex flex-col justify-start', 'bg-midnight-100 dark:bg-midnight-800',
         settings.animations ? 'transition-none' : 'transition-translate duration-500',
-        isSidebarVisible ? 'translate-x-[0%]' : 'translate-x-[-100%]', 'w-[30%] lg:w-[60%] md:w-[100%] min-w-[300px] text-sm')}>
+        isSidebarVisible ? 'translate-x-[0%]' : 'translate-x-[-100%]', 'w-[30%] lg:w-[80%] md:w-[100%] min-w-[300px] text-sm')}>
 
         <div className='py-[4em]'></div>
         <ul className="flex flex-grow flex-col justify-between text-gray">
@@ -118,7 +118,7 @@ const SideBar = () => {
           <DropDown
             icon={<FiPaperclip />}
             title="Projects"
-            items={["kyza.dev", "indexr.dev", "mini-pomodoro.dev", "gitreadme.dev", 'instruct.nvim']}
+            items={["kyza.dev", "indexr", "pomodoro", 'instruct.nvim']}
           />
           <DropDown
             icon={<FiMessageSquare />}
@@ -129,9 +129,6 @@ const SideBar = () => {
               </div>,
               <div key="phone" className="flex w-full justify-between">
                 Phone: <span>+1 (123) 456-7890</span>
-              </div>,
-              <div key="discord" className="flex w-full justify-between">
-                Discord: <span>kyza#9474</span>
               </div>,
             ]}
           />
@@ -158,14 +155,14 @@ const SideBar = () => {
             title="Settings"
             isSettings={true}
             items={[
-              <div className='min-h-[400px] space-x-4 py-6'>
+              <div className='space-x-4 py-6 min-h-[85px]'>
                 <div className="inline-flex items-center space-x-2">
-                  <Switch checked={settings.gradient} onCheckedChange={() => setSetting('gradient', !settings.gradient)} />
+                  <Switch checked={!settings.gradient} onCheckedChange={() => setSetting('gradient', !settings.gradient)} />
                   <Label htmlFor="gradient">Gradient</Label>
                 </div>
 
                 <div className="inline-flex items-center space-x-2">
-                  <Switch checked={settings.animations} onCheckedChange={() => setSetting('animations', !settings.animations)} />
+                  <Switch checked={!settings.animations} onCheckedChange={() => setSetting('animations', !settings.animations)} />
                   <Label htmlFor="animations">Animations</Label>
                 </div>
               </div>
