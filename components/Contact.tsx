@@ -17,9 +17,19 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
-type EmailData = { from: string; subject: string; text: string; };
+interface EmailData {
+  from: string;
+  subject: string;
+  body: string;
+}
 
-const useSendEmail = (setEmailStatus, setLoading) => async emailData => {
+type SetEmailStatus = (status: string) => void;
+type SetLoading = (loading: boolean) => void;
+
+const useSendEmail = (
+  setEmailStatus: SetEmailStatus,
+  setLoading: SetLoading
+) => async (emailData: EmailData): Promise<void> => {
   setLoading(true);
   setEmailStatus('');
   try {
@@ -60,7 +70,7 @@ const ContactForm = () => {
     const emailData: EmailData = {
       from: values.email,
       subject: values.subject,
-      text: values.message,
+      body: values.message,
     };
     await sendEmail(emailData);
   }

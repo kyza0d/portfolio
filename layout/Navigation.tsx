@@ -2,8 +2,6 @@
 
 import { useEffect } from "react";
 
-import { Small } from "layout/Typeography";
-
 import useReactScroll from 'hooks/useReactScroll';
 import { concat } from "@/utils";
 
@@ -57,48 +55,49 @@ const Navigation = () => {
     return currentSection;
   }
 
-  useEffect(() => {
-    // Get the current section that the user is viewing
-    let currentSection = getCurrentSection();
 
-    // Get all navigation items
-    const items = document.querySelectorAll(".navigation-item") as NodeListOf<HTMLElement>;
+useEffect(() => {
+  // Get the current section that the user is viewing
+  let currentSection = getCurrentSection();
 
-    // Class names to be toggled
-    const classesToAdd = ["text-midnight-800", "dark:text-midnight-200"];
+  // Get all navigation items
+  const items = document.querySelectorAll(".navigation-item") as NodeListOf<HTMLElement>;
 
-    // Updates the styles of the navigation items based on the given y-coordinate
-    function updateNavigationItems(y: number) {
-      let closestItem: HTMLElement | null = null;
-      let closest_distance = Infinity;
+  // Class names to be toggled
+  const classesToAdd = ["text-midnight-800", "dark:text-midnight-200"];
 
-      // Find the navigation item closest to the given y-coordinate
-      items.forEach((item) => {
-        const itemY = item.getBoundingClientRect().y;
-        const distance = Math.abs(itemY - y);
+  // Updates the styles of the navigation items based on the given y-coordinate
+  function updateNavigationItems(y: number) {
+    let closestItem: HTMLElement | any;
+    let closestDistance = Infinity;
 
-        if (distance < closest_distance) {
-          closestItem = item;
-          closest_distance = distance;
-        }
+    // Find the navigation item closest to the given y-coordinate
+    items.forEach((item: HTMLElement) => {
+      const itemY = item.getBoundingClientRect().y;
+      const distance = Math.abs(itemY - y);
 
-        // Update styles of all navigation items based on their distance from the y-coordinate
-        item.style.transform = `scale(${1 - distance / 400})`;
-        item.style.opacity = `${1 - distance / 250}`;
-      });
-
-      // Remove 'active' class and other classes from all navigation items
-      items.forEach((item) => {
-        item.classList.remove("active");
-        classesToAdd.forEach(cls => item.classList.remove(cls));
-      });
-
-      // Add 'active' class and other classes to the closest navigation item
-      if (closestItem != null) {
-        closestItem.classList.add("active");
-        classesToAdd.forEach(cls => closestItem.classList.add(cls));
+      if (distance < closestDistance) {
+        closestItem = item;
+        closestDistance = distance;
       }
+
+      // Update styles of all navigation items based on their distance from the y-coordinate
+      item.style.transform = `scale(${1 - distance / 400})`;
+      item.style.opacity = `${1 - distance / 250}`;
+    });
+
+    // Remove 'active' class and other classes from all navigation items
+    items.forEach((item: HTMLElement) => {
+      item.classList.remove("active");
+      classesToAdd.forEach((cls) => item.classList.remove(cls));
+    });
+
+    // Add 'active' class and other classes to the closest navigation item
+    if (closestItem) {
+      closestItem.classList.add("active");
+      classesToAdd.forEach((cls) => closestItem!.classList.add(cls)); // Non-null assertion since we've checked for null
     }
+  }
 
     // Get the navigation pane element
     const navigation_pane = document.querySelector("#navigation-pane");

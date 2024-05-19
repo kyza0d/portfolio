@@ -18,19 +18,22 @@ const Text: React.FC<TextProps> = ({ children, className, size = "md", variant =
     default: "p"
   };
 
-  const variantStyles = {
+  const variantStyles: { [key: string]: string } = {
     header: "font-bold text-midnight-800 dark:text-midnight-200",
     subtitle: "font-bold text-midnight-800 dark:text-midnight-200"
   };
 
-  const variantClass = variantStyles[variant] || "";
+  const variantClass = variantStyles[variant] || "default";
 
   const tag = variantMap[variant] || variantMap["default"];
 
-  return React.createElement(tag, {
-    className: cn(sizeClass, "text-midnight-600 dark:text-midnight-400", variantClass, className),
+  return React.createElement(
+    tag,
+    {
+      className: cn(sizeClass, "text-midnight-600 dark:text-midnight-400", variantClass, className)
+    },
     children
-  });
+  );
 };
 
 export { Text };
