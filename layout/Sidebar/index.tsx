@@ -1,13 +1,18 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
+
 import { concat } from 'utils';
+
 import { FiChevronDown, FiHome, FiUser, FiTool, FiPaperclip, FiMessageSquare, FiUsers, FiSettings } from 'react-icons/fi';
+
 import { useSidebar } from 'layout/Sidebar/context';
 import { useSettings } from 'layout/Settings/context';
+
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+
+import { CSSTransition } from 'react-transition-group';
 
 // Define prop types for ListItem
 interface ListItemProps {
@@ -50,7 +55,6 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
 
   return (
     <div className={`border-b border-b-[#293345] ${className} ${isSettings ? 'py-[0px]' : ''}`}>
-
       <div className={`flex cursor-pointer items-center h-[60px] px-8 ${isSettings && 'border-t border-t-[#293345] bg-midnight-100 dark:bg-midnight-800'}`} onClick={() => toggleItemCollapse(title)}>
         <div className="mr-3 h-[1.40em] w-[1.40em]">
           {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-white' })}
@@ -91,15 +95,34 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
   )
 };
 
+const BackdropHandler = () => {
+  const { isSidebarVisible, toggleSidebar } = useSidebar();
+
+  return (
+    <CSSTransition
+      in={isSidebarVisible}
+      timeout={300}
+      classNames="backdrop"
+      unmountOnExit
+    >
+      <div
+        onClick={toggleSidebar}
+        className="fixed inset-0 z-10 backdrop-blur-xl bg-[#000000] bg-opacity-50"
+      />
+    </CSSTransition>
+  );
+}
+
 // SideBar Component
 const SideBar = () => {
-  const { isSidebarVisible, toggleSidebar } = useSidebar();
+  const { isSidebarVisible } = useSidebar();
 
   // Inside your Sidebar component
   const { settings, setSetting } = useSettings();
 
   return (
     <>
+      <BackdropHandler />
       <div id="sidebar" className={concat(
         'h-screen',
         'fixed top-0 z-20',

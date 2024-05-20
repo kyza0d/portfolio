@@ -137,6 +137,24 @@ html.light {
   background-color: #CADCEF;
 }
 
+.backdrop-enter {
+    opacity: 0;
+}
+
+.backdrop-enter-active {
+    opacity: 1;
+      transition: opacity 300ms;
+}
+
+.backdrop-exit {
+    opacity: 1;
+}
+
+.backdrop-exit-active {
+    opacity: 0;
+      transition: opacity 300ms;
+}
+
 b {
   color: #c1d7ec;
 }
