@@ -31,7 +31,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
         <body className={concat(manrope.className, "subpixel-antialiased")}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
