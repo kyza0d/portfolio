@@ -117,25 +117,21 @@ textarea:focus-visible {
 }
 
 :root #gradient-canvas {
+  width: 100%;
+  height: 100%;
   --gradient-color-1: #06101a;
   --gradient-color-2: #0b1f33;
   --gradient-color-3: #06101a;
   --gradient-color-4: #06101a;
-  width: 100%;
-  height: 100%;
+
+  --gradient-color-light-1: #a1cdfc;
+  --gradient-color-light-2: #ffffff;
+  --gradient-color-light-3: #ffffff;
+  --gradient-color-light-4: #ffffff;
 }
 
-html.light #gradient-canvas {
-  filter: invert(0.95) hue-rotate(180deg) saturate(1.8);
-}
-
-html.dark {
-  background-color: #06101a;
-}
-
-html.light {
-  background-color: #CADCEF;
-}
+html.dark { background-color: #06101a; }
+html.light { background-color: #CADCEF; }
 
 .backdrop-enter {
     opacity: 0;
