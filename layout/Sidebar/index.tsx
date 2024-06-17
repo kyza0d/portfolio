@@ -33,7 +33,7 @@ interface DropDownProps {
 const ListItem = ({ children, icon }: ListItemProps) => (
   <li className="mb-6 inline-flex items-center px-8">
     <div className="mr-3 flex h-[1.40em] w-[1.40em] items-center">
-      {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-white' })}
+      {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-midnight-200' })}
     </div>
     {children}
   </li>
@@ -57,7 +57,7 @@ const DropDown = ({ title, items, icon, className, isSettings }: DropDownProps) 
     <div className={`border-b border-b-[#293345] ${className} ${isSettings ? 'py-[0px]' : ''}`}>
       <div className={`flex cursor-pointer items-center h-[60px] px-8 ${isSettings && 'border-t border-t-[#293345] bg-midnight-100 dark:bg-midnight-800'}`} onClick={() => toggleItemCollapse(title)}>
         <div className="mr-3 h-[1.40em] w-[1.40em]">
-          {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-white' })}
+          {React.cloneElement(icon, { className: 'fill text-midnight-800 dark:text-midnight-200' })}
         </div>
         <span className="mr-auto inline-block">{title}</span>
         <FiChevronDown className={`${isSettings ? (isCollapsed ? 'rotate-[0deg]' : 'rotate-[-180deg]') : (isCollapsed ? 'rotate-[-180deg]' : '')} transform transition-transform`} />
@@ -107,7 +107,7 @@ const BackdropHandler = () => {
     >
       <div
         onClick={toggleSidebar}
-        className="fixed inset-0 z-10 backdrop-blur-xl bg-[#000000] bg-opacity-50"
+        className="fixed inset-0 z-10 lg:backdrop-blur-md lg:bg-midnight-900"
       />
     </CSSTransition>
   );
@@ -128,13 +128,14 @@ const SideBar = () => {
         'fixed top-0 z-20',
         'overflow-y-scroll',
         'z-10 translate-x-[-100%]',
+        'text-midnight-800 dark:text-midnight-400',
         'border-r border-[#293345]',
-        'flex flex-col justify-start', 'bg-midnight-100 dark:bg-midnight-800',
+        'flex flex-col justify-start', 'bg-midnight-100 dark:bg-midnight-900',
         settings.animations ? 'transition-none' : 'transition-translate duration-500',
         isSidebarVisible ? 'translate-x-[0%]' : 'translate-x-[-100%]', 'w-[30%] lg:w-[80%] md:w-[100%] min-w-[300px] text-sm')}>
 
         <div className='py-[4em]'></div>
-        <ul className="flex flex-grow flex-col justify-between text-gray">
+        <ul className="flex flex-grow flex-col justify-between">
           <ListItem icon={<FiHome />}><a href="#Home">Home</a></ListItem>
           <ListItem icon={<FiUser />}><a href="#About">About</a></ListItem>
           <ListItem icon={<FiTool />}><a href="#Skills">Skills</a></ListItem>
@@ -148,11 +149,11 @@ const SideBar = () => {
             title="Contact"
             items={[
               <div key="email" className="flex w-full justify-between">
-                Email: <span>contact@kyza.dev</span>
+                Email: <a href="mailto:contact@kyza.dev">contact@kyza.dev</a>
               </div>,
-              <div key="phone" className="flex w-full justify-between">
-                Phone: <span>+1 (123) 456-7890</span>
-              </div>,
+              // <div key="phone" className="flex w-full justify-between">
+              //   Phone: <span>+1 (772) 456-7890</span>
+              // </div>,
             ]}
           />
           <DropDown
@@ -163,10 +164,10 @@ const SideBar = () => {
                 Github: <a href="https://github.com/kyza0d/">github.com/kyza0d/</a>
               </div>,
               <div key="email" className="flex w-full justify-between">
-                Instagram: <span>instagram.com/kyza0d/</span>
+                Instagram: <a href="https://instagram.com/kyza0d/">instagram.com/kyza0d/</a>
               </div>,
               <div key="linkedin" className="flex w-full justify-between">
-                Linkedin: <span>linkedin.com/in/kyza0d/</span>
+                Linkedin: <a href='https://linkedin.com/in/kyza0d/'>linkedin.com/in/kyza0d/</a>
               </div>,
             ]}
           />
@@ -190,7 +191,7 @@ const SideBar = () => {
                 </div>
               </div>
             ]}
-            className={concat("sticky bottom-0 left-0 mt-auto border-b-0 text-gray", "h-fit w-full")}
+            className={concat("sticky bottom-0 left-0 mt-auto border-b-0", "h-fit w-full")}
             icon={<FiSettings />}
           />
         </ul >

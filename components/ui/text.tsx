@@ -30,7 +30,7 @@ const Text: React.FC<TextProps> = ({ children, className, size = "md", variant =
   return React.createElement(
     tag,
     {
-      className: cn(sizeClass, "text-midnight-600 dark:text-midnight-400", variantClass, className)
+      className: cn(sizeClass, "max-w-[70ch] text-midnight-600 dark:text-midnight-400", variantClass, className)
     },
     children
   );

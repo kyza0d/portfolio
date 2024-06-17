@@ -198,50 +198,80 @@ export default function Home() {
         <div className="mb-24 md:flex-col-reverse flex justify-center gap-12 md:mb-16 ">
           <div className="my-auto flex flex-col">
             <div className="flex items-start flex-col mb-6">
-              <Text variant="header" size="lg"> Indexr </Text>
-              <Text variant="default" size="sm"> Extensive Data Search</Text>
+              <Text variant="header" size="lg">Pomotea</Text>
+              <Text variant="default" size="sm">Pomodoro Timer App</Text>
             </div>
 
-            <Text variant="subtitle" size="sm" className="mb-2"> Description: </Text>
+            <Text variant="subtitle" size="sm" className="mb-2">Description:</Text>
             <Text size="sm" className="mb-6 max-w-[60ch]">
-              Indexr is a versatile web application designed for efficient data management and searching. It empowers users with optimized search capabilities using Fuse.js, allowing seamless exploration of custom datasets. The clean interface ensures a user-friendly experience, while the app's login feature enables access to and viewing of uploaded datasets.
+              Pomotea is a feature-rich Pomodoro timer application designed to enhance productivity through structured focus and break sessions. It allows users to create and manage custom sessions, adjust appearance settings, and receive notifications for focus and break times. The app's interface is intuitive and customizable, making it suitable for various productivity needs.
             </Text>
 
-            <Text variant="subtitle" size="sm" className="mb-2">
-              Key Features:
-            </Text>
+            <Text variant="subtitle" size="sm" className="my-2">Key Features:</Text>
 
-            <ul className="mb-5 list-disc text-lightgray pl-4">
-              <li><Text size='sm'>Optimized searching with Fuse.js integration.</Text></li>
-              <li><Text size='sm'>Login to access and view other uploaded datasets.</Text></li>
-              <li><Text size='sm'>Upload and search through custom datasets.</Text></li>
-              <li><Text size='sm'>Clean and user-friendly interface.</Text></li>
-            </ul>
+            <dl className="mb-5 list-disc text-lightgray pl-4 space-y-3">
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Persistent Session Management.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Pomotea saves user session data, ensuring that current sessions and durations are remembered even when the page is closed and reopened. This persistence allows users to maintain their workflow without losing track of their progress.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Customizable Focus and Break Sessions.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Users can create custom focus and break sessions tailored to their specific needs. The app offers flexibility in session length, titles, and types, supporting a personalized approach to time management.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Appearance and Notification Settings.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Pomotea includes extensive customization options for appearance, such as font selection, background settings, and theme adjustments. Users can also configure notifications to stay informed about session changes, enhancing their productivity routine.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">User-friendly Interface.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">The app features a clean and intuitive interface, making it easy to navigate and use. Its simplicity ensures a smooth user experience, helping users focus on their tasks without distraction.</Text>
+                </dd>
+              </div>
+            </dl>
 
-            <Text variant="subtitle" size="sm" className="mb-2">
-              Technologies:
-            </Text>
+            <Text variant="subtitle" size="sm" className="my-2">Technologies:</Text>
 
-            <div className="flex items-center">
-              <Text className="mr-2" size="sm">Front-end:</Text>
+            <Text variant='subtitle' className="mr-2" size="sm">Front-end:</Text>
+            <div className="flex items-center mb-2">
               <Skill lang="React" />
               <Skill lang="Next.js" />
               <Skill lang="Tailwind CSS" last={true} />
             </div>
 
+            <Text variant="subtitle" className="mr-2" size="sm">Back-end:</Text>
             <div className="mb-6 flex items-center">
-              <Text className="mr-2" size="sm">Back-end:</Text>
-              <Skill lang="PlanetScale" />
-              <Skill lang="Prisma" last={true} />
+              <Skill lang="IndexedDB" />
             </div>
 
-            <Text size="sm" className="flex items-center leading-6">
-              Website: <span className="pl-3 underline">https://example.com</span>
-            </Text>
+            <Text variant="subtitle" size="sm" className="my-2">Links:</Text>
 
-            <Text size="sm" className="flex items-center leading-6">
-              Github: <span className="pl-3 underline">https://github.com/username/repo</span>
-            </Text>
+            <div>
+              <Text size="sm" variant="subtitle">
+                Website:
+              </Text>
+              <Text size="sm" className="underline mb-2">https://pomotea.com</Text>
+            </div>
+            <div>
+              <Text size="sm" variant="subtitle">
+                Github:
+              </Text>
+              <Text size="sm" className="underline">https://github.com/username/repo</Text>
+            </div>
           </div>
 
           <div className="md:w-full my-auto h-[400px] w-[60%] bg-[#000000]/20 rounded-[9px]">
@@ -250,10 +280,94 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+
+        <div className="mb-24 md:flex-col-reverse flex justify-center gap-12 md:mb-16">
+          <div className="my-auto flex flex-col">
+            <div className="flex items-start flex-col mb-6">
+              <Text variant="header" size="lg">Indexr</Text>
+              <Text variant="default" size="sm">Extensive Data Search</Text>
+            </div>
+
+            <Text variant="subtitle" size="sm" className="mb-2">Description:</Text>
+            <Text size="sm" className="mb-6 max-w-[60ch]">
+              Indexr is a versatile web application designed for efficient data management and searching. It empowers users with optimized search capabilities using Fuse.js, allowing seamless exploration of custom datasets. The clean interface ensures a user-friendly experience, while the app's login feature enables access to and viewing of uploaded datasets.
+            </Text>
+
+            <Text variant="subtitle" size="sm" className="my-2">Key Features:</Text>
+
+            <dl className="mb-5 list-disc text-lightgray pl-4 space-y-3">
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Optimized searching with Fuse.js integration.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Indexr integrates Fuse.js for optimized search functionality, allowing users to quickly find relevant information within extensive datasets. This feature enhances productivity by reducing the time spent searching for specific data points.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Secure login and dataset access.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">The application includes a secure login system, enabling users to access and view datasets uploaded by others. This fosters a collaborative environment where data can be shared and analyzed collectively, enhancing teamwork and resource sharing.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">Custom dataset management.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Users can upload their custom datasets to Indexr, making it easier to manage and search through personalized data collections. This feature is particularly useful for projects requiring specific datasets, offering a tailored data management experience.</Text>
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  <Text size='sm' variant="subtitle">User-friendly interface.</Text>
+                </dt>
+                <dd>
+                  <Text size='sm' className="text-gray-600">Indexr boasts a clean and intuitive interface, ensuring a smooth user experience. The simplicity of the design reduces the learning curve, allowing users to navigate the application effortlessly and focus on their data analysis tasks.</Text>
+                </dd>
+              </div>
+            </dl>
+
+            <Text variant="subtitle" size="sm" className="my-2">Technologies:</Text>
+
+            <Text variant='subtitle' className="mr-2" size="sm">Front-end:</Text>
+            <div className="flex items-center mb-2">
+              <Skill lang="React" />
+              <Skill lang="Next.js" />
+              <Skill lang="Tailwind CSS" last={true} />
+            </div>
+
+            <Text variant="subtitle" className="mr-2" size="sm">Back-end:</Text>
+            <div className="mb-6 flex items-center">
+              <Skill lang="PlanetScale" />
+              <Skill lang="Prisma" last={true} />
+            </div>
+
+            <Text variant="subtitle" size="sm" className="my-2">Links:</Text>
+
+            <div>
+              <Text size="sm" variant="subtitle">Website:</Text>
+              <Text size="sm" className="underline mb-2">https://example.com</Text>
+            </div>
+            <div>
+              <Text size="sm" variant="subtitle">Github:</Text>
+              <Text size="sm" className="underline">https://github.com/username/repo</Text>
+            </div>
+          </div>
+
+          <div className="md:w-full my-auto h-[400px] w-[60%] bg-[#000000]/20 rounded-[9px]">
+            <div className="flex items-center relative h-full w-full">
+              <Text className="gradient mx-auto after:opacity-[0.7]">Coming soon</Text>
+            </div>
+          </div>
+        </div>
+
+      </section >
 
       {/* -- Contact ----------------------------------------------- */}
-      <section id="Contact">
+      < section id="Contact" >
 
         <div className="mb-[2em]">
           <Text variant="header" size="xl">
@@ -265,7 +379,7 @@ export default function Home() {
         </div>
 
         <ContactForm />
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

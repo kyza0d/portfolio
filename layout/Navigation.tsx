@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import useReactScroll from 'hooks/useReactScroll';
 import { concat } from "@/utils";
+import { Text } from "@/components/ui/text";
 
 // Took insperation from https://www.gent.media/manrope
 // Navigation component that displays a vertical navigation pane
@@ -56,48 +57,48 @@ const Navigation = () => {
   }
 
 
-useEffect(() => {
-  // Get the current section that the user is viewing
-  let currentSection = getCurrentSection();
+  useEffect(() => {
+    // Get the current section that the user is viewing
+    let currentSection = getCurrentSection();
 
-  // Get all navigation items
-  const items = document.querySelectorAll(".navigation-item") as NodeListOf<HTMLElement>;
+    // Get all navigation items
+    const items = document.querySelectorAll(".navigation-item") as NodeListOf<HTMLElement>;
 
-  // Class names to be toggled
-  const classesToAdd = ["text-midnight-800", "dark:text-midnight-200"];
+    // Class names to be toggled
+    const classesToAdd = ["text-midnight-800", "dark:text-midnight-200"];
 
-  // Updates the styles of the navigation items based on the given y-coordinate
-  function updateNavigationItems(y: number) {
-    let closestItem: HTMLElement | any;
-    let closestDistance = Infinity;
+    // Updates the styles of the navigation items based on the given y-coordinate
+    function updateNavigationItems(y: number) {
+      let closestItem: HTMLElement | any;
+      let closestDistance = Infinity;
 
-    // Find the navigation item closest to the given y-coordinate
-    items.forEach((item: HTMLElement) => {
-      const itemY = item.getBoundingClientRect().y;
-      const distance = Math.abs(itemY - y);
+      // Find the navigation item closest to the given y-coordinate
+      items.forEach((item: HTMLElement) => {
+        const itemY = item.getBoundingClientRect().y;
+        const distance = Math.abs(itemY - y);
 
-      if (distance < closestDistance) {
-        closestItem = item;
-        closestDistance = distance;
+        if (distance < closestDistance) {
+          closestItem = item;
+          closestDistance = distance;
+        }
+
+        // Update styles of all navigation items based on their distance from the y-coordinate
+        item.style.transform = `scale(${1 - distance / 800})`;
+        item.style.opacity = `${1 - distance / 300}`;
+      });
+
+      // Remove 'active' class and other classes from all navigation items
+      items.forEach((item: HTMLElement) => {
+        item.classList.remove("active");
+        classesToAdd.forEach((cls) => item.classList.remove(cls));
+      });
+
+      // Add 'active' class and other classes to the closest navigation item
+      if (closestItem) {
+        closestItem.classList.add("active");
+        classesToAdd.forEach((cls) => closestItem!.classList.add(cls)); // Non-null assertion since we've checked for null
       }
-
-      // Update styles of all navigation items based on their distance from the y-coordinate
-      item.style.transform = `scale(${1 - distance / 400})`;
-      item.style.opacity = `${1 - distance / 250}`;
-    });
-
-    // Remove 'active' class and other classes from all navigation items
-    items.forEach((item: HTMLElement) => {
-      item.classList.remove("active");
-      classesToAdd.forEach((cls) => item.classList.remove(cls));
-    });
-
-    // Add 'active' class and other classes to the closest navigation item
-    if (closestItem) {
-      closestItem.classList.add("active");
-      classesToAdd.forEach((cls) => closestItem!.classList.add(cls)); // Non-null assertion since we've checked for null
     }
-  }
 
     // Get the navigation pane element
     const navigation_pane = document.querySelector("#navigation-pane");
@@ -182,22 +183,32 @@ useEffect(() => {
 
   return (
     <ul
-      className="fixed left-[2%] top-[50%] flex translate-y-[-50%] flex-col xl:hidden"
+      className="fixed left-[2%] top-[50%] flex translate-y-[-50%] flex-col xl:hidden space-y-4"
       id="navigation-pane">
       <Item className="Home" href="#Home">
-        Home
+        <Text variant="header">Home</Text>
       </Item>
       <Item className="About" href="#About">
-        About
+        <Text variant="header">About</Text>
+        <Text size="sm">
+          Learn more about me
+        </Text>
       </Item>
       <Item className="Skills" href="#Skills">
-        Skills
+        <Text variant="header">Skills</Text>
+        <Text size="sm">
+          Learn more about my skills
+        </Text>
       </Item>
       <Item className="Projects" href="#Projects">
-        Projects
+        <Text variant="header">Projects</Text>
+        <Text size="sm">
+          Find out more about my projects
+        </Text>
       </Item>
       <Item className="Contact" href="#Contact">
-        Contact
+        <Text variant="header">Contact</Text>
+        <Text size="sm">Glad to hear from you</Text>
       </Item>
     </ul>
   );

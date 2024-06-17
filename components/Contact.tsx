@@ -147,9 +147,11 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
+
         <Button variant="outline" type="submit" disabled={loading}>
           {loading ? 'Sending...' : 'Submit'}
         </Button>
+
         {renderAlert()}
       </form>
     </Form>
